@@ -88,7 +88,6 @@ def play_match(player1, player2):
                 num_invalid_moves[player2] += 1
 
         elif player2 == winner:
-            game.print_board()
             num_wins[player2] += 1
 
             if termination == "timeout":
@@ -160,9 +159,8 @@ def main():
     # systems; i.e., the performance of the student agent is considered
     # relative to the performance of the ID_Improved agent to account for
     # faster or slower computers.
-#    test_agents = [Agent(CustomPlayer(score_fn=improved_score, **CUSTOM_ARGS), "ID_Improved"),
-#                   Agent(CustomPlayer(score_fn=custom_score, **CUSTOM_ARGS), "Student")]
-    test_agents = [Agent(CustomPlayer(score_fn=custom_score, **CUSTOM_ARGS), "Student")]
+    test_agents = [Agent(CustomPlayer(score_fn=improved_score, **CUSTOM_ARGS), "ID_Improved"),
+                   Agent(CustomPlayer(score_fn=custom_score, **CUSTOM_ARGS), "Student")]
 
     print(DESCRIPTION)
     for agentUT in test_agents:
