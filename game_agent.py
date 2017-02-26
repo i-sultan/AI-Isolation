@@ -45,14 +45,23 @@ def custom_score(game, player):
         return float("inf")
 
     own_moves = game.get_legal_moves(player)
-    opp_moves = game.get_legal_moves(game.get_opponent(player))
+    opponent = game.get_opponent(player)
+    opp_moves = game.get_legal_moves(opponent)
+
+    bonus = 0
+    center = (game.width>>2,game.height>>2)
+    player_location = game.get_player_location(player)
+    opponent_location = game.get_player_location(opponent)
+    if center not in opp_moves and ( opponent_location == (2, 1) or opponent_location == (-2, 1) or
+                                     opponent_location == (2,-1) or opponent_location == (-2,-1)):
+        bonus += 2
 
     # if only one move is remaining for opponent, try to block it
     if game.active_player == player:
         if len(opp_moves) == 1 and opp_moves[0] in own_moves:
             return float("inf")
 
-    return float(len(own_moves) - len(opp_moves))
+    return float(bonus + len(own_moves) - len(opp_moves))
 
 
 class CustomPlayer:
